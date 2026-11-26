@@ -343,3 +343,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .pub-deck h4{font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
 .pub-deck h4::before{content:"";width:22px;height:2px;background:var(--amber)}
 .pub>div{min-width:0}
+/* ---------- live visitor counter ---------- */
+.views-pill b{font-weight:800;color:var(--ink)}
+.views-pill em,.views-foot em{font-style:normal}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#2fb36d;box-shadow:0 0 0 3px rgba(47,179,109,.2);animation:blink 1.6s ease-in-out infinite}
+.views-foot{display:inline-flex;align-items:center;gap:6px;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+.views-foot b{color:var(--amber);font-weight:800}
+[data-views][hidden]{display:none}

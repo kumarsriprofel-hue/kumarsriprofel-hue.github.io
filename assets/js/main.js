@@ -65,6 +65,7 @@
     if (safeUrl(p.github)) socials += '<a class="soc" href="' + esc(safeUrl(p.github)) + '" target="_blank" rel="noopener noreferrer">' + ICONS.github + 'GitHub</a>';
     if (mail) socials += '<a class="soc" href="' + esc(mail) + '">' + ICONS.mail + 'Email</a>';
     if (p.location) socials += '<span class="soc">📍 ' + esc(p.location) + '</span>';
+    socials += '<span class="soc views-pill" data-views hidden title="Total page views (updates live)"><i class="live-dot"></i>👁 <b>0</b><em></em></span>';
     return '<section class="hero"><div class="wrap hero-grid"><div>' +
       (p.status ? '<span class="hello"><span></span><i class="dot"></i>' + esc(p.status) + '</span>' : '') +
       '<h1>Hi, I\'m <em class="hl">' + esc(p.name) + '</em></h1>' +
@@ -374,6 +375,61 @@
     document.getElementById('yr').textContent = new Date().getFullYear();
   }
 
+  // ---------- visitor counter (GoatCounter: free, open source, no cookies) ----------
+  // Counting uses a tiny image request, so no third-party script ever runs on this page.
+  // Add ?nocount=1 to the URL once on your own devices to stop counting your own visits (?nocount=0 to undo).
+  function initCounter(a) {
+    var code = String(a.goatcounter_code || '').trim().toLowerCase();
+    if (!/^[a-z0-9][a-z0-9-]{1,48}$/.test(code)) return;
+    var base = 'https://' + code + '.goatcounter.com';
+    var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
+    var skip = false;
+    try {
+      var q = new URLSearchParams(location.search).get('nocount');
+      if (q === '1') localStorage.setItem('pk-nocount', '1');
+      if (q === '0') localStorage.removeItem('pk-nocount');
+      skip = localStorage.getItem('pk-nocount') === '1';
+    } catch (e) {}
+    var bot = navigator.webdriver || /bot|crawl|spider|headless|lighthouse/i.test(navigator.userAgent);
+    if (!local && !skip && !bot) {
+      var ref = document.referrer && document.referrer.indexOf(location.origin) !== 0 ? document.referrer : '';
+      var px = new Image();
+      px.referrerPolicy = 'no-referrer-when-downgrade';
+      px.src = base + '/count?p=' + encodeURIComponent(location.pathname || '/') +
+        '&t=' + encodeURIComponent(document.title) + '&r=' + encodeURIComponent(ref) +
+        '&s=' + encodeURIComponent([screen.width, screen.height, window.devicePixelRatio || 1].join(',')) +
+        '&rnd=' + Math.random().toString(36).slice(2);
+    }
+    if (a.show_counter === false) return;
+    var label = a.counter_label || 'views';
+    var spots = [].slice.call(document.querySelectorAll('[data-views]'));
+    var shown = 0;
+    function draw(total) {
+      var n = parseInt(String(total).replace(/[^\d]/g, ''), 10);
+      if (!isFinite(n)) return;
+      var from = shown, t0 = performance.now(), dur = shown ? 600 : 1200;
+      shown = n;
+      function paint(v) { spots.forEach(function (s) { s.querySelector('b').textContent = v.toLocaleString(); s.querySelector('em').textContent = ' ' + label; s.hidden = false; }); }
+      // background tabs pause animations, so show the final number straight away there
+      if (document.hidden || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) { paint(n); return; }
+      (function step(t) {
+        var k = Math.min(1, (t - t0) / dur);
+        paint(Math.round(from + (n - from) * (1 - Math.pow(1 - k, 3))));
+        if (k < 1) requestAnimationFrame(step);
+      })(t0);
+      setTimeout(function () { paint(n); }, dur + 100);   // safety net: always end on the exact number
+    }
+    function load() {
+      fetch(base + '/counter/TOTAL.json', { cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer' })
+        .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function (j) { if (j && j.count != null) draw(j.count); })
+        .catch(function () {});
+    }
+    setTimeout(load, local || skip ? 0 : 1500);   // give our own visit a moment to be counted
+    setInterval(function () { if (!document.hidden) load(); }, 60000);   // live refresh every minute
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) load(); });
+  }
+
   function render(data) {
     var p = data.profile || {};
     document.title = p.name || document.title;
@@ -391,6 +447,7 @@
       if (!document.querySelector(a.getAttribute('href'))) a.parentNode.hidden = true;
     });
     wire(data);
+    initCounter(data.analytics || {});
     if (location.hash) { var t = document.querySelector(location.hash.replace(/[^#\w-]/g, '')); if (t) t.scrollIntoView(); }
   }
 

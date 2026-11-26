@@ -186,3 +186,11 @@ content:
           - { name: eyebrow, label: Small label, type: string }
           - { name: heading, label: Heading, type: string }
           - { name: text, label: Text, type: text }
+
+      - name: analytics
+        label: Visitor counter
+        type: object
+        fields:
+          - { name: goatcounter_code, label: "GoatCounter code (the part before .goatcounter.com)", type: string }
+          - { name: show_counter, label: Show the view count on the page, type: boolean }
+          - { name: counter_label, label: "Counter word (e.g. views, visits)", type: string }

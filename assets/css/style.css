@@ -276,3 +276,43 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .loading{min-height:60vh;display:grid;place-items:center;color:var(--ink-2)}
 .ph-svg{width:100%;height:100%}
 .c-item.static{cursor:default}
+/* ---------- slide deck viewer ---------- */
+.project.deck{grid-column:1/-1;padding:14px}
+.viewer{background:var(--green);border-radius:20px;padding:12px;outline:none}
+.viewer:focus-visible{box-shadow:0 0 0 3px var(--amber)}
+.stage{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fff;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.stage .slide{width:100%;height:100%;object-fit:contain;display:block;transition:opacity .25s ease}
+.stage .slide.fade{opacity:.35}
+.nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:var(--amber);color:var(--on-amber);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.25);transition:transform .15s,opacity .2s}
+.nav-btn:hover{transform:translateY(-50%) scale(1.08)}
+.nav-btn.prev{left:12px}.nav-btn.next{right:12px}
+.nav-btn:disabled{opacity:0;pointer-events:none}
+.progress{height:4px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden;margin-top:12px}
+.progress i{display:block;height:100%;width:0;background:var(--amber);transition:width .3s ease}
+.vbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 4px 4px;color:#fff;flex-wrap:wrap}
+.count{font-weight:700;font-size:.95rem}
+.count b{color:var(--amber);font-size:1.1rem}
+.vbtns{display:flex;gap:8px}
+.vbtn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:.8rem;font-weight:700;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;cursor:pointer;text-decoration:none}
+.vbtn:hover{border-color:var(--amber);color:var(--amber)}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 4px;scrollbar-width:thin;scrollbar-color:var(--amber) transparent}
+.thumbs button{flex:0 0 auto;width:112px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid transparent;padding:0;background:#fff;cursor:pointer;opacity:.55;transition:opacity .2s,border-color .2s}
+.thumbs button:hover{opacity:.9}
+.thumbs button[aria-current="true"]{border-color:var(--amber);opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.deck .pbody{display:grid;grid-template-columns:1.25fr 1fr;gap:6px 32px;padding:22px 12px 8px}
+.deck-stats{grid-template-columns:1fr 1fr;margin:0 0 4px}
+.deck-side .chip-row{margin-top:14px}
+.viewer:fullscreen{background:#0b130e;padding:18px;display:flex;flex-direction:column;justify-content:center;border-radius:0}
+.viewer:fullscreen .stage{aspect-ratio:auto;flex:1;background:#0b130e;border-radius:0}
+.viewer:fullscreen .thumbs{display:none}
+@media (max-width:760px){
+  .deck .pbody{grid-template-columns:1fr;padding:18px 6px 6px}
+  .project.deck{padding:10px}.viewer{padding:8px;border-radius:16px}
+  .nav-btn{width:36px;height:36px}.nav-btn.prev{left:6px}.nav-btn.next{right:6px}
+  .thumbs button{width:84px}
+  .vbtn{padding:7px 11px}
+}
+/* let grid items shrink so the scrollable thumbnail strip can't widen the page */
+.projects>*,.deck .pbody>*,.viewer{min-width:0}
+.band{overflow-x:clip}

@@ -141,10 +141,92 @@
     return '<a class="pic" href="' + esc(img) + '" target="_blank" rel="noopener" aria-label="Open full image: ' + esc(pr.title) + '">' +
       '<img src="' + esc(img) + '" alt="' + esc(pr.image_alt || pr.title) + '" loading="lazy" data-focus="' + esc(pr.image_focus || '') + '"></a>';
   }
+  // ---------- slide deck (presentation viewer) ----------
+  var CHEV_L = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
+  var CHEV_R = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
+  var FULL = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  function thumbOf(u) { return /\.(jpe?g|png|webp)$/i.test(u) ? u.replace(/\.(jpe?g|png|webp)$/i, '-thumb.jpg') : u; }
+  function renderDeck(pr) {
+    var slides = list(pr.slides).map(safeUrl).filter(Boolean);
+    var pdf = safeUrl(pr.slides_pdf);
+    var n = slides.length;
+    var stats = list(pr.stats).length ? '<div class="pub-stats deck-stats">' + list(pr.stats).map(function (s) { return '<div><strong>' + esc(s.value) + '</strong><span>' + esc(s.label) + '</span></div>'; }).join('') + '</div>' : '';
+    return '<article class="project deck reveal">' +
+      '<div class="viewer" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Slides: ' + esc(pr.title) + '" data-slides="' + esc(JSON.stringify(slides)) + '">' +
+        '<div class="stage">' +
+          '<img class="slide" src="' + esc(slides[0]) + '" alt="' + esc(pr.title) + ' – slide 1 of ' + n + '" loading="lazy">' +
+          '<button class="nav-btn prev" type="button" aria-label="Previous slide">' + CHEV_L + '</button>' +
+          '<button class="nav-btn next" type="button" aria-label="Next slide">' + CHEV_R + '</button>' +
+        '</div>' +
+        '<div class="progress"><i></i></div>' +
+        '<div class="vbar"><span class="count" aria-live="polite"><b>1</b> / ' + n + '</span><div class="vbtns">' +
+          (pdf ? '<a class="vbtn" href="' + esc(pdf) + '" target="_blank" rel="noopener">' + DOWN.replace('width="16" height="16"', 'width="15" height="15"') + 'PDF</a>' : '') +
+          '<button class="vbtn fs" type="button" aria-label="Full screen">' + FULL + 'Full screen</button>' +
+        '</div></div>' +
+        '<div class="thumbs">' + slides.map(function (s, i) {
+          return '<button type="button" data-i="' + i + '" aria-label="Go to slide ' + (i + 1) + '"' + (i ? '' : ' aria-current="true"') + '><img src="' + esc(thumbOf(s)) + '" data-full="' + esc(s) + '" alt="" loading="lazy"></button>';
+        }).join('') + '</div>' +
+      '</div>' +
+      '<div class="pbody"><div class="deck-main">' +
+        '<span class="kind">' + esc(pr.kind) + '</span><h3>' + esc(pr.title) + '</h3>' +
+        (pr.summary ? '<p>' + fmt(pr.summary) + '</p>' : '') + ul(pr.bullets) +
+      '</div><div class="deck-side">' + stats + chips(pr.tags) + projectLink(pr) + '</div></div>' +
+    '</article>';
+  }
+  function initDecks() {
+    document.querySelectorAll('.viewer').forEach(function (v) {
+      var slides; try { slides = JSON.parse(v.dataset.slides || '[]'); } catch (e) { slides = []; }
+      if (!slides.length) return;
+      var img = v.querySelector('.slide'), prev = v.querySelector('.prev'), next = v.querySelector('.next');
+      var count = v.querySelector('.count b'), bar = v.querySelector('.progress i');
+      var thumbs = [].slice.call(v.querySelectorAll('.thumbs button')), i = 0, n = slides.length;
+      var title = img.alt.replace(/ – slide.*$/, '');
+      // fall back to the full image when there is no "-thumb" file (e.g. slides uploaded via the admin panel)
+      v.querySelectorAll('.thumbs img').forEach(function (t) {
+        t.addEventListener('error', function () { if (t.src.indexOf(t.dataset.full) === -1) t.src = t.dataset.full; }, { once: true });
+      });
+      function preload(k) { if (k >= 0 && k < n) { var p = new Image(); p.src = slides[k]; } }
+      function go(k) {
+        if (k < 0 || k >= n) return;
+        i = k;
+        img.classList.add('fade');
+        img.src = slides[i];
+        img.alt = title + ' – slide ' + (i + 1) + ' of ' + n;
+        count.textContent = i + 1;
+        bar.style.width = ((i + 1) / n * 100) + '%';
+        prev.disabled = i === 0; next.disabled = i === n - 1;
+        thumbs.forEach(function (t, j) { if (j === i) { t.setAttribute('aria-current', 'true'); var s = t.parentNode; s.scrollTo({ left: t.offsetLeft - s.clientWidth / 2 + t.clientWidth / 2, behavior: 'smooth' }); } else t.removeAttribute('aria-current'); });
+        preload(i + 1); preload(i - 1);
+      }
+      img.addEventListener('load', function () { img.classList.remove('fade'); });
+      prev.addEventListener('click', function () { go(i - 1); });
+      next.addEventListener('click', function () { go(i + 1); });
+      thumbs.forEach(function (t) { t.addEventListener('click', function () { go(Number(t.dataset.i)); }); });
+      v.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); go(i + 1); }
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(i - 1); }
+        else if (e.key === 'Home') { e.preventDefault(); go(0); }
+        else if (e.key === 'End') { e.preventDefault(); go(n - 1); }
+      });
+      // swipe on touch screens
+      var x0 = null, stage = v.querySelector('.stage');
+      stage.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+      stage.addEventListener('pointerup', function (e) { if (x0 === null) return; var dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1)); });
+      stage.addEventListener('pointercancel', function () { x0 = null; });
+      var fs = v.querySelector('.fs');
+      if (!v.requestFullscreen) fs.hidden = true;
+      fs.addEventListener('click', function () {
+        if (document.fullscreenElement) document.exitFullscreen(); else v.requestFullscreen().then(function () { v.focus(); }).catch(function () {});
+      });
+      go(0);
+    });
+  }
+
   function renderProjects(ps) {
     var items = list(ps.items).slice().sort(function (a, b) { return (b.featured ? 1 : 0) - (a.featured ? 1 : 0); });
     return '<section id="projects"><div class="wrap">' + head(ps.eyebrow, ps.heading) + '<div class="projects">' +
       items.map(function (pr) {
+        if (list(pr.slides).length) return renderDeck(pr);
         var stats = list(pr.stats).length ? '<div class="feat-stats">' + list(pr.stats).map(function (s) { return '<div><strong>' + esc(s.value) + '</strong><span>' + esc(s.label) + '</span></div>'; }).join('') + '</div>' : '';
         var body = (pr.featured ? '<span class="feat-badge">★ Featured project</span>' : '') +
           '<span class="kind">' + esc(pr.kind) + '</span><h3>' + esc(pr.title) + '</h3>' +
@@ -201,6 +283,8 @@
 
     // image focus points (set through CSSOM, which the CSP allows)
     document.querySelectorAll('img[data-focus]').forEach(function (img) { if (img.dataset.focus) img.style.objectPosition = img.dataset.focus; });
+
+    initDecks();
 
     function fillRings(scope) { scope.querySelectorAll('.ring-ico').forEach(function (r) { r.querySelector('.val').style.strokeDashoffset = 264 * (1 - r.dataset.w / 100); }); }
     document.querySelectorAll('.tab').forEach(function (t) {

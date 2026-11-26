@@ -137,6 +137,8 @@ content:
               - { name: image, label: Image, type: image }
               - { name: image_alt, label: Image description (for accessibility), type: string }
               - { name: image_focus, label: "Image focus point (e.g. 50% 40%)", type: string }
+              - { name: video, label: "Video (MP4, plays automatically on mute; keep under 15 MB)", type: file }
+              - { name: video_poster, label: Video cover image, type: image }
               - { name: slides, label: "Slide images, in order (adds a slide viewer to this project)", type: image, list: true }
               - { name: slides_pdf, label: Slides PDF (download button in the viewer), type: file }
               - { name: link, label: Link (Google Drive etc.), type: string }

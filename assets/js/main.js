@@ -135,7 +135,17 @@
     var u = safeUrl(pr.link);
     return u ? '<a class="p-link" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(pr.link_label || 'View project') + ' <i>' + ARROW + '</i></a>' : '';
   }
+  var SPK_OFF = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M23 9l-6 6M17 9l6 6"/></svg>';
+  var SPK_ON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>';
   function projectPic(pr) {
+    var vid = safeUrl(pr.video);
+    if (vid) {
+      var poster = safeUrl(pr.video_poster) || safeUrl(pr.image);
+      return '<div class="pic vid">' +
+        '<video class="pvid" muted loop playsinline preload="none"' + (poster ? ' poster="' + esc(poster) + '"' : '') + ' src="' + esc(vid) + '" aria-label="Video: ' + esc(pr.title) + '"></video>' +
+        '<button class="snd" type="button" aria-pressed="false" aria-label="Turn sound on">' + SPK_OFF + '<span>Tap for sound</span></button>' +
+      '</div>';
+    }
     var img = safeUrl(pr.image);
     if (!img) return '<div class="pic">' + PLACEHOLDER + '</div>';
     return '<a class="pic" href="' + esc(img) + '" target="_blank" rel="noopener" aria-label="Open full image: ' + esc(pr.title) + '">' +
@@ -222,6 +232,39 @@
     });
   }
 
+  // ---------- project videos: autoplay muted while visible; one tap turns the sound on ----------
+  function initVideos() {
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.pic.vid').forEach(function (box) {
+      var v = box.querySelector('video'), btn = box.querySelector('.snd'), label = btn.querySelector('span');
+      v.muted = true;
+      var userPaused = false;
+      function setSound(on) {
+        v.muted = !on;
+        btn.setAttribute('aria-pressed', String(on));
+        btn.setAttribute('aria-label', on ? 'Mute sound' : 'Turn sound on');
+        btn.innerHTML = (on ? SPK_ON : SPK_OFF) + '<span>' + (on ? 'Sound on' : 'Tap for sound') + '</span>';
+        btn.classList.toggle('on', on);
+      }
+      var first = true;
+      btn.addEventListener('click', function () {
+        var on = v.muted;
+        if (on && first) { v.currentTime = 0; first = false; v.controls = true; }   // first unmute: start from the beginning, show the player bar
+        setSound(on);
+        if (v.paused) v.play().catch(function () {});
+      });
+      v.addEventListener('pause', function () { if (!document.hidden && v.dataset.auto !== '1') userPaused = true; v.dataset.auto = ''; });
+      v.addEventListener('play', function () { userPaused = false; });
+      if (reduce || !('IntersectionObserver' in window)) { v.preload = 'metadata'; v.controls = true; return; }
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { if (!userPaused) v.play().catch(function () { v.controls = true; }); }
+          else if (!v.paused) { v.dataset.auto = '1'; v.pause(); }
+        });
+      }, { threshold: .35 }).observe(v);
+    });
+  }
+
   function renderProjects(ps) {
     var items = list(ps.items).slice().sort(function (a, b) { return (b.featured ? 1 : 0) - (a.featured ? 1 : 0); });
     return '<section id="projects"><div class="wrap">' + head(ps.eyebrow, ps.heading) + '<div class="projects">' +
@@ -231,7 +274,7 @@
         var body = (pr.featured ? '<span class="feat-badge">★ Featured project</span>' : '') +
           '<span class="kind">' + esc(pr.kind) + '</span><h3>' + esc(pr.title) + '</h3>' +
           (pr.summary ? '<p>' + fmt(pr.summary) + '</p>' : '') + ul(pr.bullets);
-        return '<article class="project' + (pr.featured ? ' featured' : '') + ' reveal">' + projectPic(pr) +
+        return '<article class="project' + (pr.featured ? ' featured' : '') + (safeUrl(pr.video) ? ' has-video' : '') + ' reveal">' + projectPic(pr) +
           '<div class="pbody">' + body + (pr.featured ? stats + chips(pr.tags) + projectLink(pr) : '<div class="pfoot">' + stats + chips(pr.tags) + projectLink(pr) + '</div>') + '</div></article>';
       }).join('') + '</div></div></section>';
   }
@@ -285,6 +328,7 @@
     document.querySelectorAll('img[data-focus]').forEach(function (img) { if (img.dataset.focus) img.style.objectPosition = img.dataset.focus; });
 
     initDecks();
+    initVideos();
 
     function fillRings(scope) { scope.querySelectorAll('.ring-ico').forEach(function (r) { r.querySelector('.val').style.strokeDashoffset = 264 * (1 - r.dataset.w / 100); }); }
     document.querySelectorAll('.tab').forEach(function (t) {

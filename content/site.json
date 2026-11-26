@@ -260,7 +260,9 @@
         "link": "https://drive.google.com/drive/folders/1H8TOZL1WaZ4ed4gf3Zd7eMYq2He_MOVo?usp=sharing",
         "link_label": "View report, drawings, poster & video",
         "slides": [],
-        "slides_pdf": ""
+        "slides_pdf": "",
+        "video": "assets/video/holcim-hq.mp4",
+        "video_poster": "assets/video/holcim-hq-poster.jpg"
       },
       {
         "featured": false,
@@ -319,7 +321,9 @@
         ],
         "slides_pdf": "assets/docs/GCI-World-2026-Final-Assignment-Profal-Kumar.pdf",
         "link": "",
-        "link_label": ""
+        "link_label": "",
+        "video": "",
+        "video_poster": ""
       },
       {
         "featured": false,
@@ -344,7 +348,9 @@
         "link": "https://drive.google.com/drive/folders/16AXifjJg-qSXen3p2RXfnJ1h9D09AyEG?usp=sharing",
         "link_label": "View project files",
         "slides": [],
-        "slides_pdf": ""
+        "slides_pdf": "",
+        "video": "",
+        "video_poster": ""
       },
       {
         "featured": false,
@@ -367,7 +373,9 @@
         "link": "https://drive.google.com/drive/folders/1DGAnbDh7cp7Qh7rKQifpcx0U5nveetJT?usp=sharing",
         "link_label": "View project files",
         "slides": [],
-        "slides_pdf": ""
+        "slides_pdf": "",
+        "video": "",
+        "video_poster": ""
       },
       {
         "featured": false,
@@ -390,7 +398,9 @@
         "link": "https://drive.google.com/drive/folders/1QTG-MQPzLeKW-iXZOhHDInCTBKSFQLgX?usp=sharing",
         "link_label": "View project files",
         "slides": [],
-        "slides_pdf": ""
+        "slides_pdf": "",
+        "video": "",
+        "video_poster": ""
       },
       {
         "featured": false,
@@ -413,7 +423,9 @@
         "link": "https://drive.google.com/drive/folders/1UzUlSgIEFCLtw5v9Djpqu3es5d_WBNrf?usp=sharing",
         "link_label": "View project files",
         "slides": [],
-        "slides_pdf": ""
+        "slides_pdf": "",
+        "video": "",
+        "video_poster": ""
       }
     ]
   },

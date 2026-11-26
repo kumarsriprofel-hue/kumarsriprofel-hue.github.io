@@ -211,8 +211,8 @@
           "Major: Structural Engineering · Minor: Water Resources Engineering"
         ],
         "tags": [],
-        "note_label": "Thesis",
-        "note": "Spatio-Temporal Prediction of Coastal Embankment Failure in Sundarbans: An Integrated Remote Sensing, Hydrodynamic, and Machine Learning Approach"
+        "note_label": "Thesis · in progress",
+        "note": "Thermal Performance Enhancement of Asphalt Pavements Using Polymer-Modified Bitumen: A Bangladesh Perspective"
       }
     ]
   },
@@ -471,6 +471,48 @@
           "Python ML",
           "Random Forest",
           "Gradient boosting"
+        ],
+        "link": "",
+        "status": ""
+      },
+      {
+        "type": "Undergraduate thesis",
+        "status": "In progress",
+        "venue": "B.Sc. thesis · Department of Civil Engineering, RUET",
+        "title": "Thermal Performance Enhancement of Asphalt Pavements Using Polymer-Modified Bitumen: A Bangladesh Perspective",
+        "authors": "**Profal Kumar**",
+        "affiliation": "Rajshahi University of Engineering and Technology (RUET)",
+        "summary": "A laboratory study comparing asphalt mixtures made with conventional 60/70 penetration-grade bitumen and polymer-modified bitumen at high pavement temperatures, to find out how much polymer modification can improve pavement durability in Bangladesh's hot climate.",
+        "stats": [
+          {
+            "value": "60–75 °C",
+            "label": "Four high test temperatures"
+          },
+          {
+            "value": "2 binders",
+            "label": "60/70 bitumen vs polymer-modified"
+          },
+          {
+            "value": "3 indices",
+            "label": "SDR, SiDR and FIR degradation rates"
+          },
+          {
+            "value": "3 replicates",
+            "label": "Specimens per mix, temperature and conditioning"
+          }
+        ],
+        "method": [
+          "Test Marshall stability, flow and stiffness of both mixtures at 60, 65, 70 and 75 °C.",
+          "Compare short and extended heat conditioning to see how longer exposure affects strength.",
+          "Calculate stability degradation rate (SDR), stiffness degradation rate (SiDR) and flow increase rate (FIR) to measure thermal susceptibility.",
+          "Check results against specification limits (stability ≥ 9 kN, flow 2–4 mm, stiffness ≥ 4 kN/mm) and judge whether polymer-modified binder suits Bangladesh's hot regions."
+        ],
+        "tags": [
+          "Pavement engineering",
+          "Polymer-modified bitumen",
+          "Marshall test",
+          "Asphalt mix design",
+          "Laboratory testing"
         ],
         "link": ""
       }

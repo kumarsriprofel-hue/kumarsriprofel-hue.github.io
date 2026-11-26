@@ -285,10 +285,13 @@
     return '<section id="publications" class="pt0"><div class="wrap">' + head(pb.eyebrow, pb.heading) +
       items.map(function (it) {
         var stats = list(it.stats).length ? '<div class="pub-stats">' + list(it.stats).map(function (s) { return '<div><strong>' + esc(s.value) + '</strong><span>' + esc(s.label) + '</span></div>'; }).join('') + '</div>' : '';
-        var method = list(it.method).length ? '<details><summary>Read more about the method</summary>' + ul(it.method) + '</details>' : '';
+        var mlabel = /progress/i.test(it.status || '') ? 'Objectives & planned method' : 'Read more about the method';
+        var method = list(it.method).length ? '<details><summary>' + mlabel + '</summary>' + ul(it.method) + '</details>' : '';
         var link = safeUrl(it.link) ? '<div class="pub-link"><a class="p-link" href="' + esc(safeUrl(it.link)) + '" target="_blank" rel="noopener noreferrer">Read the paper <i>' + ARROW + '</i></a></div>' : '';
         return '<article class="pub reveal"><div class="pub-ico">' + ICONS.doc + '</div><div>' +
-          '<div class="pub-meta"><span class="pill">' + esc(it.type) + '</span><span>' + esc(it.venue) + '</span></div>' +
+          '<div class="pub-meta"><span class="pill">' + esc(it.type) + '</span>' +
+            (it.status ? '<span class="status' + (/progress|review/i.test(it.status) ? ' live' : '') + '">' + esc(it.status) + '</span>' : '') +
+            '<span>' + esc(it.venue) + '</span></div>' +
           '<h3>' + esc(it.title) + '</h3><p class="authors">' + fmt(it.authors) + ' <span>· ' + esc(it.affiliation) + '</span></p>' +
           (it.summary ? '<p class="pub-sum">' + fmt(it.summary) + '</p>' : '') + stats + method + chips(it.tags) + link + '</div></article>';
       }).join('') + '</div></section>';

@@ -156,6 +156,10 @@ content:
             list: true
             fields:
               - { name: type, label: Type (e.g. Conference paper), type: string }
+              - name: status
+                label: Status (leave empty if published)
+                type: select
+                options: { values: ["", In progress, Under review, Accepted, Published] }
               - { name: venue, label: Conference / journal, type: string }
               - { name: title, label: Title, type: text }
               - { name: authors, label: Authors, type: string }

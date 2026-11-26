@@ -476,43 +476,43 @@
         "status": ""
       },
       {
-        "type": "Undergraduate thesis",
+        "type": "Conference paper · B.Sc. thesis",
         "status": "In progress",
-        "venue": "B.Sc. thesis · Department of Civil Engineering, RUET",
+        "venue": "International Conference on Civil Engineering 2026 · Paper ID 1143",
         "title": "Thermal Performance Enhancement of Asphalt Pavements Using Polymer-Modified Bitumen: A Bangladesh Perspective",
-        "authors": "**Profal Kumar**",
-        "affiliation": "Rajshahi University of Engineering and Technology (RUET)",
-        "summary": "A laboratory study comparing asphalt mixtures made with conventional 60/70 penetration-grade bitumen and polymer-modified bitumen at high pavement temperatures, to find out how much polymer modification can improve pavement durability in Bangladesh's hot climate.",
+        "authors": "Tanbir Ahmmed, **Profal Kumar** and Md. Abu Sayeed",
+        "affiliation": "Department of Civil Engineering, RUET",
+        "summary": "Evaluates polymer-modified bitumen (PMB) as a binder for Bangladesh's hot, wet climate, where conventional 60/70 bitumen (softening point only 45–52 °C) leads to rutting, thermal cracking and deformation. The study aims to find the best polymer type and dosage and to give implementation recommendations for the national highway network.",
         "stats": [
           {
-            "value": "60–75 °C",
-            "label": "Four high test temperatures"
+            "value": "370,000 km",
+            "label": "Bangladesh road network the study targets"
           },
           {
-            "value": "2 binders",
-            "label": "60/70 bitumen vs polymer-modified"
+            "value": "5 · 7 · 9%",
+            "label": "Polymer dosages by weight"
           },
           {
-            "value": "3 indices",
-            "label": "SDR, SiDR and FIR degradation rates"
+            "value": "180 °C",
+            "label": "High-shear mixing temperature"
           },
           {
-            "value": "3 replicates",
-            "label": "Specimens per mix, temperature and conditioning"
+            "value": "5 tests",
+            "label": "ASTM binder tests + DSR rheology"
           }
         ],
         "method": [
-          "Test Marshall stability, flow and stiffness of both mixtures at 60, 65, 70 and 75 °C.",
-          "Compare short and extended heat conditioning to see how longer exposure affects strength.",
-          "Calculate stability degradation rate (SDR), stiffness degradation rate (SiDR) and flow increase rate (FIR) to measure thermal susceptibility.",
-          "Check results against specification limits (stability ≥ 9 kN, flow 2–4 mm, stiffness ≥ 4 kN/mm) and judge whether polymer-modified binder suits Bangladesh's hot regions."
+          "Modify base bitumen with different polymers at 5%, 7% and 9% by weight, using high-shear mixing at 180 °C.",
+          "Test specimens to ASTM standards: penetration (D5), softening point (D36), ductility (D113) and viscosity (D4402).",
+          "Use a Dynamic Shear Rheometer (DSR) to assess viscoelastic behaviour and rutting resistance against Superpave requirements.",
+          "Compare life-cycle cost, service life and carbon emissions of PMB with conventional bitumen."
         ],
         "tags": [
-          "Pavement engineering",
           "Polymer-modified bitumen",
-          "Marshall test",
-          "Asphalt mix design",
-          "Laboratory testing"
+          "Pavement engineering",
+          "ASTM binder tests",
+          "DSR rheology",
+          "Life-cycle cost"
         ],
         "link": ""
       }

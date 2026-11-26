@@ -175,6 +175,9 @@ content:
               - { name: method, label: Method steps, type: text, list: true }
               - { name: tags, label: Tags, type: string, list: true }
               - { name: link, label: Paper link (DOI / PDF), type: string }
+              - { name: slides_label, label: Slides heading (e.g. Conference presentation), type: string }
+              - { name: slides, label: "Slide images, in order (adds a slide viewer)", type: image, list: true }
+              - { name: slides_pdf, label: Slides PDF (download button), type: file }
 
       - name: contact
         label: Contact section

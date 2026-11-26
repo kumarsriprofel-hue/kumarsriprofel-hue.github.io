@@ -435,7 +435,7 @@
     "items": [
       {
         "type": "Conference paper",
-        "venue": "CUET Conference · Paper #924 · Camera-ready",
+        "venue": "ICACE 2026 (CUET) · Paper ID 924 · Camera-ready",
         "title": "Spatio-Temporal Prediction of Coastal Embankment Failure in Sundarbans: An Integrating Remote Sensing, Hydrodynamic and Machine Learning Approach",
         "authors": "**P. Kumar***, N. Roy and M. A. Sayeed",
         "affiliation": "Department of Civil Engineering, RUET · *Corresponding author",
@@ -473,7 +473,27 @@
           "Gradient boosting"
         ],
         "link": "",
-        "status": ""
+        "status": "",
+        "slides": [
+          "assets/slides/cuet-924/slide-01.jpg",
+          "assets/slides/cuet-924/slide-02.jpg",
+          "assets/slides/cuet-924/slide-03.jpg",
+          "assets/slides/cuet-924/slide-04.jpg",
+          "assets/slides/cuet-924/slide-05.jpg",
+          "assets/slides/cuet-924/slide-06.jpg",
+          "assets/slides/cuet-924/slide-07.jpg",
+          "assets/slides/cuet-924/slide-08.jpg",
+          "assets/slides/cuet-924/slide-09.jpg",
+          "assets/slides/cuet-924/slide-10.jpg",
+          "assets/slides/cuet-924/slide-11.jpg",
+          "assets/slides/cuet-924/slide-12.jpg",
+          "assets/slides/cuet-924/slide-13.jpg",
+          "assets/slides/cuet-924/slide-14.jpg",
+          "assets/slides/cuet-924/slide-15.jpg",
+          "assets/slides/cuet-924/slide-16.jpg"
+        ],
+        "slides_pdf": "assets/docs/CUET-Paper924-Sundarbans-Embankment-Slides.pdf",
+        "slides_label": "Conference presentation: my part (machine learning and HEC-RAS 2D)"
       },
       {
         "type": "Conference paper · B.Sc. thesis",
@@ -514,7 +534,10 @@
           "DSR rheology",
           "Life-cycle cost"
         ],
-        "link": ""
+        "link": "",
+        "slides": [],
+        "slides_pdf": "",
+        "slides_label": ""
       }
     ]
   },

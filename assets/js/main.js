@@ -156,15 +156,14 @@
   var CHEV_R = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
   var FULL = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
   function thumbOf(u) { return /\.(jpe?g|png|webp)$/i.test(u) ? u.replace(/\.(jpe?g|png|webp)$/i, '-thumb.jpg') : u; }
-  function renderDeck(pr) {
-    var slides = list(pr.slides).map(safeUrl).filter(Boolean);
-    var pdf = safeUrl(pr.slides_pdf);
-    var n = slides.length;
-    var stats = list(pr.stats).length ? '<div class="pub-stats deck-stats">' + list(pr.stats).map(function (s) { return '<div><strong>' + esc(s.value) + '</strong><span>' + esc(s.label) + '</span></div>'; }).join('') + '</div>' : '';
-    return '<article class="project deck reveal">' +
-      '<div class="viewer" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Slides: ' + esc(pr.title) + '" data-slides="' + esc(JSON.stringify(slides)) + '">' +
+  // shared slide viewer markup (used by project cards and research cards)
+  function renderViewer(slidesIn, pdfIn, title) {
+    var slides = list(slidesIn).map(safeUrl).filter(Boolean);
+    if (!slides.length) return '';
+    var pdf = safeUrl(pdfIn), n = slides.length;
+    return '<div class="viewer" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Slides: ' + esc(title) + '" data-slides="' + esc(JSON.stringify(slides)) + '">' +
         '<div class="stage">' +
-          '<img class="slide" src="' + esc(slides[0]) + '" alt="' + esc(pr.title) + ' – slide 1 of ' + n + '" loading="lazy">' +
+          '<img class="slide" src="' + esc(slides[0]) + '" alt="' + esc(title) + ' – slide 1 of ' + n + '" loading="lazy">' +
           '<button class="nav-btn prev" type="button" aria-label="Previous slide">' + CHEV_L + '</button>' +
           '<button class="nav-btn next" type="button" aria-label="Next slide">' + CHEV_R + '</button>' +
         '</div>' +
@@ -176,7 +175,11 @@
         '<div class="thumbs">' + slides.map(function (s, i) {
           return '<button type="button" data-i="' + i + '" aria-label="Go to slide ' + (i + 1) + '"' + (i ? '' : ' aria-current="true"') + '><img src="' + esc(thumbOf(s)) + '" data-full="' + esc(s) + '" alt="" loading="lazy"></button>';
         }).join('') + '</div>' +
-      '</div>' +
+      '</div>';
+  }
+  function renderDeck(pr) {
+    var stats = list(pr.stats).length ? '<div class="pub-stats deck-stats">' + list(pr.stats).map(function (s) { return '<div><strong>' + esc(s.value) + '</strong><span>' + esc(s.label) + '</span></div>'; }).join('') + '</div>' : '';
+    return '<article class="project deck reveal">' + renderViewer(pr.slides, pr.slides_pdf, pr.title) +
       '<div class="pbody"><div class="deck-main">' +
         '<span class="kind">' + esc(pr.kind) + '</span><h3>' + esc(pr.title) + '</h3>' +
         (pr.summary ? '<p>' + fmt(pr.summary) + '</p>' : '') + ul(pr.bullets) +
@@ -293,7 +296,9 @@
             (it.status ? '<span class="status' + (/progress|review/i.test(it.status) ? ' live' : '') + '">' + esc(it.status) + '</span>' : '') +
             '<span>' + esc(it.venue) + '</span></div>' +
           '<h3>' + esc(it.title) + '</h3><p class="authors">' + fmt(it.authors) + ' <span>· ' + esc(it.affiliation) + '</span></p>' +
-          (it.summary ? '<p class="pub-sum">' + fmt(it.summary) + '</p>' : '') + stats + method + chips(it.tags) + link + '</div></article>';
+          (it.summary ? '<p class="pub-sum">' + fmt(it.summary) + '</p>' : '') + stats + method + chips(it.tags) + link + '</div>' +
+          (list(it.slides).length ? '<div class="pub-deck"><h4>' + esc(it.slides_label || 'Presentation slides') + '</h4>' + renderViewer(it.slides, it.slides_pdf, it.title) + '</div>' : '') +
+          '</article>';
       }).join('') + '</div></section>';
   }
 

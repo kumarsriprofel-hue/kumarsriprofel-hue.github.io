@@ -338,3 +338,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .status.live::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:blink 1.4s ease-in-out infinite}
 @keyframes blink{50%{opacity:.25}}
 .pub+.pub{margin-top:22px}
+/* slide viewer inside a research card */
+.pub-deck{grid-column:1/-1;min-width:0;border-top:1px solid var(--line);padding-top:22px}
+.pub-deck h4{font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.pub-deck h4::before{content:"";width:22px;height:2px;background:var(--amber)}
+.pub>div{min-width:0}

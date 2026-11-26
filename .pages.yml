@@ -1,0 +1,177 @@
+# Admin panel config for Pages CMS (https://app.pagescms.org)
+# Sign in with GitHub, open this repository, and edit everything with forms.
+# Text formatting you can use in any text box:  **bold**   and   *amber highlight*
+
+media:
+  input: assets/uploads
+  output: assets/uploads
+  categories: [image, document]
+
+content:
+  - name: site
+    label: Website content
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: profile
+        label: Profile & contact
+        type: object
+        fields:
+          - { name: name, label: Your name, type: string, required: true }
+          - { name: logo_letter, label: Logo letter, type: string }
+          - { name: status, label: Status badge (top of page), type: string }
+          - { name: intro, label: Intro sentence, type: text }
+          - { name: location, label: Location, type: string }
+          - { name: email, label: Email, type: string }
+          - { name: phone, label: Phone (leave empty to hide), type: string }
+          - { name: linkedin, label: LinkedIn URL, type: string }
+          - { name: github, label: GitHub URL, type: string }
+          - { name: cv, label: CV file (PDF or Word), type: file }
+          - { name: photo, label: Main photo (transparent PNG works best), type: image }
+          - { name: about_photo, label: About section photo, type: image }
+          - { name: cgpa, label: CGPA, type: string }
+          - { name: cgpa_label, label: CGPA label, type: string }
+          - { name: badge_ring_text, label: Spinning badge text, type: string }
+          - { name: badge_center, label: Badge centre text, type: string }
+          - { name: hero_tag_1, label: Photo label 1, type: string }
+          - { name: hero_tag_2, label: Photo label 2, type: string }
+
+      - name: marquee
+        label: Scrolling bands
+        type: object
+        fields:
+          - { name: main, label: Amber band words, type: string, list: true }
+          - { name: back, label: Green band words, type: string, list: true }
+
+      - name: about
+        label: About me
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: paragraphs, label: Paragraphs, type: text, list: true }
+          - name: stats
+            label: Numbers
+            type: object
+            list: true
+            fields:
+              - { name: value, label: Number, type: string }
+              - { name: label, label: Label, type: string }
+          - { name: photo_chips, label: Labels around photo (max 6), type: string, list: true }
+          - { name: signature, label: Signature, type: string }
+
+      - name: skills
+        label: Skills
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - name: groups
+            label: Skill groups (tabs)
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Tab name, type: string }
+              - name: items
+                label: Skills
+                type: object
+                list: true
+                fields:
+                  - { name: name, label: Skill name, type: string }
+                  - { name: short, label: Short code in circle (2-3 letters), type: string }
+                  - name: level
+                    label: Level
+                    type: select
+                    options: { values: [Expert, Proficient, Competent, Elementary] }
+                  - { name: percent, label: Ring fill (0-100), type: number }
+                  - { name: description, label: Description, type: text }
+
+      - name: experience
+        label: Experience & education
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - name: items
+            label: Entries
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: Icon
+                type: select
+                options: { values: [work, education] }
+              - { name: when, label: Dates & place, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: org, label: Organisation, type: string }
+              - { name: bullets, label: Bullet points, type: text, list: true }
+              - { name: tags, label: Tags, type: string, list: true }
+              - { name: note_label, label: Highlight box label (e.g. Thesis), type: string }
+              - { name: note, label: Highlight box text, type: text }
+
+      - name: projects
+        label: Projects
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - name: items
+            label: Projects
+            type: object
+            list: true
+            fields:
+              - { name: featured, label: Featured (big green card), type: boolean }
+              - { name: kind, label: Category line, type: string }
+              - { name: title, label: Title, type: string }
+              - { name: summary, label: Short summary, type: text }
+              - { name: bullets, label: Bullet points, type: text, list: true }
+              - name: stats
+                label: Numbers (optional)
+                type: object
+                list: true
+                fields:
+                  - { name: value, label: Number, type: string }
+                  - { name: label, label: Label, type: string }
+              - { name: tags, label: Tags, type: string, list: true }
+              - { name: image, label: Image, type: image }
+              - { name: image_alt, label: Image description (for accessibility), type: string }
+              - { name: image_focus, label: "Image focus point (e.g. 50% 40%)", type: string }
+              - { name: link, label: Link (Google Drive etc.), type: string }
+              - { name: link_label, label: Link text, type: string }
+
+      - name: publications
+        label: Publications
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - name: items
+            label: Papers
+            type: object
+            list: true
+            fields:
+              - { name: type, label: Type (e.g. Conference paper), type: string }
+              - { name: venue, label: Conference / journal, type: string }
+              - { name: title, label: Title, type: text }
+              - { name: authors, label: Authors, type: string }
+              - { name: affiliation, label: Affiliation, type: string }
+              - { name: summary, label: Summary, type: text }
+              - name: stats
+                label: Key results
+                type: object
+                list: true
+                fields:
+                  - { name: value, label: Number, type: string }
+                  - { name: label, label: Label, type: string }
+              - { name: method, label: Method steps, type: text, list: true }
+              - { name: tags, label: Tags, type: string, list: true }
+              - { name: link, label: Paper link (DOI / PDF), type: string }
+
+      - name: contact
+        label: Contact section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Text, type: text }

@@ -1,0 +1,229 @@
+{
+  "profile": {
+    "name": "Profal Kumar",
+    "logo_letter": "P",
+    "status": "Open to internships & opportunities",
+    "intro": "**Civil Engineering** undergraduate at RUET, working on **structural design**, **water resources** and **traffic engineering**.",
+    "location": "Rajshahi, Bangladesh",
+    "email": "kumarsriprofel@gmail.com",
+    "phone": "",
+    "linkedin": "https://www.linkedin.com/in/kumarprofal3six",
+    "github": "https://github.com/kumarsriprofel-hue",
+    "cv": "assets/Profal-Kumar-CV.docx",
+    "photo": "assets/profal-cutout.png",
+    "about_photo": "assets/profal-cutout.png",
+    "cgpa": "3.77",
+    "cgpa_label": "CGPA / 4.00",
+    "badge_ring_text": "CIVIL ENGINEERING · RUET · B.Sc. CE ·",
+    "badge_center": "CE RUET",
+    "hero_tag_1": "Structural Engineering",
+    "hero_tag_2": "Water Resources"
+  },
+  "marquee": {
+    "main": ["Structural Design", "Water Resources", "Traffic Engineering", "Flood Modelling", "Machine Learning", "Structural Drafting"],
+    "back": ["AutoCAD", "ETABS", "HEC-RAS", "PTV Vissim", "Python", "SketchUp", "BNBC 2020", "ACI 318-19"]
+  },
+  "about": {
+    "eyebrow": "About me",
+    "heading": "Who is *Profal Kumar?*",
+    "paragraphs": [
+      "I'm pursuing my Bachelor of Science in Civil Engineering at **Rajshahi University of Engineering and Technology (RUET)**, majoring in Structural Engineering with a minor in Water Resources Engineering.",
+      "I like technology and solving problems. I've designed multi-storied reinforced concrete buildings in ETABS and AutoCAD, modelled flood risk with HEC-RAS, simulated traffic in PTV Vissim, and used Python machine learning for engineering forecasting.",
+      "I'm looking for challenging work where I can contribute to an organisation's growth while building my technical and communication skills."
+    ],
+    "stats": [
+      { "value": "3.77", "label": "CGPA out of 4.00" },
+      { "value": "5", "label": "Major projects" },
+      { "value": "G+10", "label": "Tallest building drafted" },
+      { "value": "1", "label": "Peer-reviewed conference paper" }
+    ],
+    "photo_chips": ["AutoCAD", "ETABS", "HEC-RAS", "PTV Vissim", "Python", "SketchUp"],
+    "signature": "Profal Kumar"
+  },
+  "skills": {
+    "eyebrow": "Skills",
+    "heading": "Exploring the *tools* behind my designs",
+    "groups": [
+      {
+        "name": "Engineering software",
+        "items": [
+          { "name": "AutoCAD", "short": "CAD", "level": "Proficient", "percent": 90, "description": "Structural drafting and detailing for multi-storied buildings (G+10, 5 and 2 storey), from concept through construction documents." },
+          { "name": "ETABS", "short": "ETB", "level": "Proficient", "percent": 88, "description": "Analysis and design of RC buildings: load computation, member sizing and code compliance checks." },
+          { "name": "HEC-RAS", "short": "RAS", "level": "Competent", "percent": 70, "description": "2D hydrodynamic modelling for flood-risk assessment research, published at a peer-reviewed conference." },
+          { "name": "PTV Vissim", "short": "VIS", "level": "Competent", "percent": 68, "description": "Microscopic traffic simulation and signal-timing analysis for an intersection capstone project." },
+          { "name": "SketchUp", "short": "SKP", "level": "Elementary", "percent": 40, "description": "Conceptual 3D visualisation and early massing studies." },
+          { "name": "AutoCAD Electrical & Mechanical", "short": "E/M", "level": "Elementary", "percent": 35, "description": "Familiar with the interface, schematic layouts and basic drafting conventions." }
+        ]
+      },
+      {
+        "name": "Technical & office",
+        "items": [
+          { "name": "Python", "short": "Py", "level": "Competent", "percent": 70, "description": "Machine learning predictive models, including ensemble methods (Random Forest, XGBoost) for engineering forecasting." },
+          { "name": "Microsoft Excel", "short": "XL", "level": "Proficient", "percent": 88, "description": "Cost estimation, data analysis and engineering calculations." },
+          { "name": "Microsoft Word", "short": "W", "level": "Proficient", "percent": 90, "description": "Technical reports and approval documentation." },
+          { "name": "Microsoft PowerPoint", "short": "P", "level": "Proficient", "percent": 88, "description": "Project and research presentations." }
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "Experience & education",
+    "heading": "Where I've *learned & worked*",
+    "items": [
+      {
+        "icon": "work",
+        "when": "Feb 2026 – Apr 2026 · Rajshahi",
+        "title": "Industrial Attachment",
+        "org": "Rajshahi Design and Construction (RDC)",
+        "bullets": [
+          "Did work planning, code study, land survey, structural drafting and structural analysis on active projects.",
+          "Prepared RDA and Pourashava approval documents, electrical and plumbing layouts and cost estimates, and made site visits."
+        ],
+        "tags": ["Land survey", "Structural analysis", "Cost estimation", "Approval drawings"],
+        "note_label": "",
+        "note": ""
+      },
+      {
+        "icon": "education",
+        "when": "Dec 2022 – Present · Rajshahi",
+        "title": "B.Sc. in Civil Engineering",
+        "org": "Rajshahi University of Engineering and Technology (RUET) · CGPA 3.77 / 4.00",
+        "bullets": ["Major: Structural Engineering · Minor: Water Resources Engineering"],
+        "tags": [],
+        "note_label": "Thesis",
+        "note": "Spatio-Temporal Prediction of Coastal Embankment Failure in Sundarbans: An Integrated Remote Sensing, Hydrodynamic, and Machine Learning Approach"
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "heading": "Things I've *designed & built*",
+    "items": [
+      {
+        "featured": true,
+        "kind": "Competition · Holcim Structural Excellence Awards 2026",
+        "title": "Holcim HQ Dhaka: \"The Breathing Ring\"",
+        "summary": "Category 3 (Next Generation Visionary Design) entry: a five-storey corporate headquarters built as an open ring crossed by twin office wings. I designed the structure and the sustainability strategy.",
+        "bullets": [
+          "Reinforced-concrete dual system of special moment frames and 12\" shear walls at the lift and stair cores, plus six radial walls. Modelled in ETABS 22 to BNBC 2020 and ACI 318-19.",
+          "Seismic drift of 0.0018 against a 0.020 limit, and 100% of members pass. Design base shear is 2,080 kip.",
+          "A 127.6 kWp rooftop solar system avoids about 108 t of CO₂ per year, and rainwater harvesting collects about 3 million litres per year. The design also uses low-clinker cement."
+        ],
+        "stats": [
+          { "value": "G+4", "label": "Storeys" },
+          { "value": "0.0018", "label": "Peak drift" },
+          { "value": "100%", "label": "Members pass" },
+          { "value": "108 t", "label": "CO₂ saved / yr" }
+        ],
+        "tags": ["ETABS 22", "BNBC 2020", "ACI 318-19", "Sustainable design"],
+        "image": "assets/holcim-hq.jpg",
+        "image_alt": "3D render of Holcim HQ Dhaka: a curved five-storey office ring with orange facade screens, green terraces and solar carports",
+        "image_focus": "55% 60%",
+        "link": "https://drive.google.com/drive/folders/1H8TOZL1WaZ4ed4gf3Zd7eMYq2He_MOVo?usp=sharing",
+        "link_label": "View report, drawings, poster & video"
+      },
+      {
+        "featured": false,
+        "kind": "Transportation · Capstone",
+        "title": "Sathmatha Intersection, Bogura",
+        "summary": "Traffic volume, Level of Service and signal optimisation study.",
+        "bullets": [
+          "Collected traffic volume data and analysed LOS in PTV Vissim.",
+          "Proposed signal-timing changes to improve flow and reduce congestion.",
+          "Built a 3D model of the proposed five-arm X-type foot overbridge, with signals and road markings."
+        ],
+        "stats": [],
+        "tags": ["PTV Vissim", "LOS analysis", "Signal timing", "3D model"],
+        "image": "assets/sathmatha-aerial.jpg",
+        "image_alt": "3D aerial view of Bogura Sathmatha intersection with a five-arm X-type foot overbridge, signals and road markings",
+        "image_focus": "50% 45%",
+        "link": "https://drive.google.com/drive/folders/16AXifjJg-qSXen3p2RXfnJ1h9D09AyEG?usp=sharing",
+        "link_label": "View project files"
+      },
+      {
+        "featured": false,
+        "kind": "Structural · RC building",
+        "title": "B+9-Storied Residential Building",
+        "summary": "",
+        "bullets": [
+          "Structural analysis and design in ETABS to applicable building codes.",
+          "Full structural drafting and detailing in AutoCAD, from foundation to superstructure."
+        ],
+        "stats": [],
+        "tags": ["ETABS", "AutoCAD", "Basement + 9"],
+        "image": "assets/b9-tower.jpg",
+        "image_alt": "3D render of the B+9-storied residential building with white and beige facade, blue accents and planted balconies",
+        "image_focus": "50% 40%",
+        "link": "https://drive.google.com/drive/folders/1DGAnbDh7cp7Qh7rKQifpcx0U5nveetJT?usp=sharing",
+        "link_label": "View project files"
+      },
+      {
+        "featured": false,
+        "kind": "Structural · RC building",
+        "title": "5-Storied Residential Building",
+        "summary": "",
+        "bullets": [
+          "Designed for gravity and lateral loads in ETABS.",
+          "Detailed structural drawings and reinforcement layouts in AutoCAD."
+        ],
+        "stats": [],
+        "tags": ["ETABS", "AutoCAD", "Lateral loads"],
+        "image": "",
+        "image_alt": "",
+        "image_focus": "50% 50%",
+        "link": "https://drive.google.com/drive/folders/1QTG-MQPzLeKW-iXZOhHDInCTBKSFQLgX?usp=sharing",
+        "link_label": "View project files"
+      },
+      {
+        "featured": false,
+        "kind": "Structural · Low-rise",
+        "title": "2-Storied Residential Building",
+        "summary": "",
+        "bullets": [
+          "Analysis and design of a low-rise residential structure in ETABS.",
+          "Architectural and structural drafting in AutoCAD for construction."
+        ],
+        "stats": [],
+        "tags": ["ETABS", "AutoCAD", "Architectural drafting"],
+        "image": "",
+        "image_alt": "",
+        "image_focus": "50% 50%",
+        "link": "https://drive.google.com/drive/folders/1UzUlSgIEFCLtw5v9Djpqu3es5d_WBNrf?usp=sharing",
+        "link_label": "View project files"
+      }
+    ]
+  },
+  "publications": {
+    "eyebrow": "Publications",
+    "heading": "My *research*",
+    "items": [
+      {
+        "type": "Conference paper",
+        "venue": "CUET Conference · Paper #924 · Camera-ready",
+        "title": "Spatio-Temporal Prediction of Coastal Embankment Failure in Sundarbans: An Integrating Remote Sensing, Hydrodynamic and Machine Learning Approach",
+        "authors": "**P. Kumar***, N. Roy and M. A. Sayeed",
+        "affiliation": "Department of Civil Engineering, RUET · *Corresponding author",
+        "summary": "Combines Landsat land-cover mapping, mangrove-based Manning's roughness, a HEC-RAS 2D model of the 31 March 2025 Bichhat breach, and machine learning to study coastal embankment failure in Assasuni, Kaliganj and Shyamnagar (Satkhira).",
+        "stats": [
+          { "value": "30.7 km²", "label": "dense mangrove lost, 2000–2025" },
+          { "value": "3.8 km²", "label": "flooding simulated in HEC-RAS 2D" },
+          { "value": "0.92", "label": "AUC for predicting failure-level tide days" },
+          { "value": "0.13 m", "label": "RMSE, next-day water level (40% better than persistence)" }
+        ],
+        "method": [
+          "Classified land use and land cover for 2000, 2010, 2015 and 2025 from Landsat imagery with Random Forest in ArcGIS Pro.",
+          "Turned land-cover classes into spatially varying Manning's n values for the HEC-RAS 2D model, driven by BWDB tide data from station SW26.",
+          "Labelled 885 embankment segments (500 m each) from 44 dated breach records (2007–2026), then trained logistic regression, random forest and gradient boosting models with spatial block cross-validation.",
+          "Built a preliminary embankment susceptibility map to help prioritise monitoring and mangrove protection."
+        ],
+        "tags": ["HEC-RAS 2D", "Remote sensing", "ArcGIS Pro", "Python ML", "Random Forest", "Gradient boosting"],
+        "link": ""
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "heading": "Let's work *together.*",
+    "text": "I'm open to internships, research collaboration and entry-level civil engineering roles. Send me a message and I'll get back to you soon."
+  }
+}

@@ -1,0 +1,8 @@
+# Local-only files (not published)
+backup/
+.claude/
+assets/profal.png
+assets/profal-pose2.png
+*.tmp
+Thumbs.db
+desktop.ini

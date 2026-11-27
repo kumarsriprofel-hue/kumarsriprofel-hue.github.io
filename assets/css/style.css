@@ -457,3 +457,5 @@ form{position:relative}
 }
 @media (prefers-reduced-motion:reduce){.km-k,.km-m,.km-gear,.km-pi,.km-ch,.km-tag{opacity:1}.chalk-f text{fill:var(--chalk);stroke-dashoffset:0}.chalk-graph .wave{stroke-dashoffset:0}.km-text h2 .hl::after{clip-path:none}}
 .chalk-graph{right:auto;left:5%;top:auto;bottom:4%;width:clamp(130px,14vw,190px)}
+.project.has-video:not(.featured) .pic{height:auto;aspect-ratio:16/9}
+.snd{white-space:nowrap}

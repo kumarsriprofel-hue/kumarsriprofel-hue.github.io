@@ -353,7 +353,8 @@
         "bullets": [
           "Collected traffic volume data and analysed LOS in PTV Vissim.",
           "Proposed signal-timing changes to improve flow and reduce congestion.",
-          "Built a 3D model of the proposed five-arm X-type foot overbridge, with signals and road markings."
+          "Built a 3D model of the proposed five-arm X-type foot overbridge, with signals and road markings.",
+          "Made a before-and-after 3D video of the intersection: today's intersection with no signal control versus the proposed overbridge and signal design."
         ],
         "stats": [],
         "tags": [
@@ -369,8 +370,8 @@
         "link_label": "View project files",
         "slides": [],
         "slides_pdf": "",
-        "video": "",
-        "video_poster": ""
+        "video": "assets/video/sathmatha.mp4",
+        "video_poster": "assets/video/sathmatha-poster.jpg"
       },
       {
         "featured": false,

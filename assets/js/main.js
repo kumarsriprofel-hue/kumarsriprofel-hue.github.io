@@ -55,12 +55,13 @@
     github: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>',
     work: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>',
     education: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>',
+    teach: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M7 9h5M7 12h3M8 20l4-4 4 4M15 8l2 2"/></svg>',
     doc: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>'
   };
   var PLACEHOLDER = '<svg class="ph-svg" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" fill="none" stroke="var(--green)" stroke-width="1.5" aria-hidden="true"><circle cx="150" cy="80" r="62" fill="var(--amber)" stroke="none" opacity=".25"/><rect x="95" y="40" width="110" height="95" fill="var(--bg)"/><path d="M95 59h110M95 78h110M95 97h110M95 116h110M132 40v95M168 40v95"/><path d="M85 30l25 10M215 30l-25 10" stroke="var(--amber)" stroke-width="3"/><path d="M40 135h220" stroke-dasharray="4 4"/></svg>';
 
   // ---------- section renderers ----------
-  function renderHero(p) {
+  function renderHero(p, f) {
     var cv = safeUrl(p.cv), mail = p.email ? 'mailto:' + p.email : '';
     var socials = '';
     if (safeUrl(p.linkedin)) socials += '<a class="soc" href="' + esc(safeUrl(p.linkedin)) + '" target="_blank" rel="noopener noreferrer">' + ICONS.linkedin + 'LinkedIn</a>';
@@ -72,6 +73,7 @@
       (p.status ? '<span class="hello"><span></span><i class="dot"></i>' + esc(p.status) + '</span>' : '') +
       '<h1>Hi, I\'m <em class="hl">' + esc(p.name) + '</em></h1>' +
       '<p class="role">' + fmt(p.intro) + '</p>' +
+      (f && f.enabled !== false ? '<a class="founder-chip" href="#kumar-math"><i class="fc-gear" aria-hidden="true">π</i><span>Founder of <b>Kumar Math</b></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></a>' : '') +
       '<div class="cta">' +
         (cv ? '<a class="btn dark" href="' + esc(cv) + '" download>Download CV <span class="arr">' + DOWN + '</span></a>' : '') +
         '<a class="btn ghost" href="#contact">Get in touch</a></div>' +
@@ -343,6 +345,7 @@
 
     initDecks();
     initVideos();
+    initFounder();
 
     function fillRings(scope) { scope.querySelectorAll('.ring-ico').forEach(function (r) { r.querySelector('.val').style.strokeDashoffset = 264 * (1 - r.dataset.w / 100); }); }
     document.querySelectorAll('.tab').forEach(function (t) {
@@ -405,6 +408,99 @@
         .then(function () { clearTimeout(timer); btn.disabled = false; btn.classList.remove('sending'); });
     });
     document.getElementById('yr').textContent = new Date().getFullYear();
+  }
+
+  // ---------- Kumar Math founder section ----------
+  // gear outline with n teeth, centred at (cx, cy)
+  function gearPath(cx, cy, n, rOut, rRoot) {
+    var d = '', step = Math.PI * 2 / n, half = step / 2, tip = step * 0.2, base = step * 0.3;
+    for (var i = 0; i < n; i++) {
+      var a = i * step - Math.PI / 2;
+      var pts = [[rRoot, a - base], [rOut, a - tip], [rOut, a + tip], [rRoot, a + base], [rRoot, a + half]];
+      pts.forEach(function (q, j) { var x = (cx + q[0] * Math.cos(q[1])).toFixed(1), y = (cy + q[0] * Math.sin(q[1])).toFixed(1); d += (i === 0 && j === 0 ? 'M' : 'L') + x + ' ' + y + ' '; });
+    }
+    return d + 'Z';
+  }
+  function kmLogoSvg() {
+    var title = 'KUMAR MATH'.split('').map(function (ch, i) { return '<tspan class="km-ch" data-i="' + i + '">' + (ch === ' ' ? '&#160;' : ch) + '</tspan>'; }).join('');
+    return '<svg class="km-logo" viewBox="0 0 760 430" role="img" aria-label="Kumar Math logo: Be rational! Get real!">' +
+      '<g class="km-k"><text x="60" y="292" class="km-letter">K</text></g>' +
+      '<g class="km-m"><text x="470" y="292" class="km-letter">M</text></g>' +
+      '<g class="km-gear"><path d="' + gearPath(380, 190, 10, 128, 100) + '" class="km-gear-body"/>' +
+        '<circle cx="380" cy="190" r="70" class="km-gear-hole"/></g>' +
+      '<text x="380" y="214" text-anchor="middle" class="km-pi">π</text>' +
+      '<text x="380" y="372" text-anchor="middle" class="km-title">' + title + '</text>' +
+      '<g class="km-tag"><text x="290" y="414" text-anchor="end">BE RATIONAL!</text><circle cx="380" cy="409" r="6" class="km-dot"/><text x="470" y="414">GET REAL!</text></g>' +
+    '</svg>';
+  }
+  // formulas the "teacher" writes on the board
+  var CHALK = [
+    { t: 'sin²θ + cos²θ = 1', x: 3, y: 12, r: -4 },
+    { t: 'F = ma', x: 80, y: 10, r: 3 },
+    { t: '∫ x dx = x²⁄2 + C', x: 70, y: 88, r: -3 },
+    { t: 'a² + b² = c²', x: 24, y: 88, r: 2 },
+    { t: 'PV = nRT', x: 44, y: 95, r: -2 },
+    { t: 'dy⁄dx', x: 90, y: 52, r: 6 }
+  ];
+  var SYMBOLS = ['π', 'Σ', '√', '∞', '∫', 'Δ', 'θ', '÷', '×', '%', 'λ', 'α', 'x²', '∂', '≈', 'μ'];
+  function renderFounder(f) {
+    if (!f || f.enabled === false) return '';
+    var app = safeUrl(f.app_link);
+    var stats = list(f.stats).map(function (s) { return '<div><strong>' + esc(s.value) + '</strong><span>' + esc(s.label) + '</span></div>'; }).join('');
+    var chalk = CHALK.map(function (c, i) {
+      return '<span class="chalk-f" data-i="' + i + '"><svg viewBox="0 0 320 60" aria-hidden="true"><text x="4" y="44">' + esc(c.t) + '</text></svg></span>';
+    }).join('');
+    return '<section id="kumar-math" class="km-sec">' +
+      '<div class="board" aria-hidden="true">' + chalk +
+        '<svg class="chalk-graph" viewBox="0 0 220 130"><path class="ax" d="M10 65H212M18 122V8"/><path class="ax tick" d="M60 61v8M110 61v8M160 61v8M14 25h8M14 105h8"/>' +
+          '<path class="wave" d="M18 65 C 38 10, 58 10, 68 65 S 98 120, 118 65 S 148 10, 168 65 S 198 120, 210 70"/><text x="196" y="58">x</text><text x="24" y="16">y</text></svg>' +
+        '<div class="floaters"></div>' +
+      '</div>' +
+      '<div class="wrap km-grid">' +
+        '<div class="km-card reveal">' + kmLogoSvg() + '<span class="chalk-stick" aria-hidden="true"></span></div>' +
+        '<div class="km-text reveal">' +
+          '<span class="eyebrow">' + esc(f.eyebrow || 'Founder') + '</span>' +
+          '<h2>' + fmt(f.heading) + '</h2>' +
+          (f.tagline ? '<p class="km-motto">“' + esc(f.tagline) + '”</p>' : '') +
+          list(f.paragraphs).map(function (t) { return '<p>' + fmt(t) + '</p>'; }).join('') +
+          chips(f.subjects) +
+          (stats ? '<div class="km-stats">' + stats + '</div>' : '') +
+          '<div class="km-cta">' +
+            (app ? '<a class="btn amber km-app" href="' + esc(app) + '" target="_blank" rel="noopener noreferrer">' + esc(f.app_label || 'Open the Kumar Math app') + ' <span class="arr">' + ARROW.replace(/14/g, '16') + '</span></a>'
+                 : '<span class="km-soon">📱 App link coming soon</span>') +
+          '</div>' +
+        '</div>' +
+      '</div></section>';
+  }
+  function initFounder() {
+    var sec = document.getElementById('kumar-math');
+    if (!sec) return;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // positions and timings are set through CSSOM (inline style attributes are blocked by the CSP)
+    sec.querySelectorAll('.chalk-f').forEach(function (el) {
+      var c = CHALK[Number(el.dataset.i)];
+      el.style.setProperty('--x', c.x + '%'); el.style.setProperty('--y', c.y + '%');
+      el.style.setProperty('--r', c.r + 'deg'); el.style.setProperty('--d', (Number(el.dataset.i) * 0.9) + 's');
+    });
+    sec.querySelectorAll('.km-ch').forEach(function (el) { el.style.setProperty('--i', el.dataset.i); });
+    // floating math symbols drifting up the chalkboard
+    var fl = sec.querySelector('.floaters');
+    if (fl && !reduce) {
+      for (var i = 0; i < 18; i++) {
+        var s = document.createElement('span');
+        s.textContent = SYMBOLS[i % SYMBOLS.length];
+        s.style.setProperty('--x', (Math.random() * 96 + 2).toFixed(1) + '%');
+        s.style.setProperty('--s', (0.9 + Math.random() * 1.6).toFixed(2) + 'rem');
+        s.style.setProperty('--t', (14 + Math.random() * 16).toFixed(1) + 's');
+        s.style.setProperty('--delay', (-Math.random() * 25).toFixed(1) + 's');
+        s.style.setProperty('--o', (0.08 + Math.random() * 0.14).toFixed(2));
+        fl.appendChild(s);
+      }
+    }
+    function play() { sec.classList.add('play'); }
+    if (reduce || !('IntersectionObserver' in window)) { play(); return; }
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { play(); io.disconnect(); } }); }, { threshold: .25 });
+    io.observe(sec);
   }
 
   // ---------- visitor counter (GoatCounter: free, open source, no cookies) ----------
@@ -471,7 +567,7 @@
     document.getElementById('foot-sign').textContent = p.name || '';
     document.getElementById('foot-loc').textContent = p.location || '';
     document.getElementById('app').innerHTML =
-      renderHero(p) + renderMarquee(data.marquee || {}) + renderAbout(data.about || {}, p) +
+      renderHero(p, data.founder) + renderMarquee(data.marquee || {}) + renderAbout(data.about || {}, p) + renderFounder(data.founder) +
       renderSkills(data.skills || {}) + renderExperience(data.experience || {}) +
       renderProjects(data.projects || {}) + renderPublications(data.publications || {}) + renderContact(data.contact || {}, p);
     // hide nav links for empty sections

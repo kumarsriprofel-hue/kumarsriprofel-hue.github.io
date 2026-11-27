@@ -30,6 +30,7 @@
       "Structural Drafting"
     ],
     "back": [
+      "Kumar Math",
       "AutoCAD",
       "ETABS",
       "HEC-RAS",
@@ -166,6 +167,25 @@
     "eyebrow": "Experience & education",
     "heading": "Where I've *learned & worked*",
     "items": [
+      {
+        "icon": "teach",
+        "when": "Aug 2023 – Present",
+        "title": "Founder & Teacher",
+        "org": "Kumar Math",
+        "bullets": [
+          "Write chapter-wise notes, formula sheets and model tests for HSC and university admission students.",
+          "Created 140+ study materials in Higher Math, Physics, Chemistry and ICT, including admission model tests with answer keys."
+        ],
+        "tags": [
+          "Teaching",
+          "Higher Math",
+          "Physics",
+          "Chemistry",
+          "Content creation"
+        ],
+        "note_label": "",
+        "note": ""
+      },
       {
         "icon": "education",
         "when": "Sep 2026 – Nov 2026",
@@ -551,5 +571,44 @@
     "goatcounter_code": "",
     "show_counter": true,
     "counter_label": "views"
+  },
+  "founder": {
+    "enabled": true,
+    "eyebrow": "Founder",
+    "heading": "Founder of *Kumar Math*",
+    "tagline": "Be rational! • Get real!",
+    "paragraphs": [
+      "I started **Kumar Math** in 2023 to help HSC and university admission students in Bangladesh learn Higher Math, Physics and Chemistry the clear way: step by step, formula by formula.",
+      "I write chapter-wise notes, formula sheets and full admission model tests with answer keys, and share them through the Kumar Math app."
+    ],
+    "subjects": [
+      "Higher Math",
+      "Physics",
+      "Chemistry",
+      "ICT",
+      "Admission prep",
+      "Model tests"
+    ],
+    "stats": [
+      {
+        "value": "2023",
+        "label": "Teaching since"
+      },
+      {
+        "value": "140+",
+        "label": "Notes, formula sheets & model tests"
+      },
+      {
+        "value": "4",
+        "label": "Subjects"
+      },
+      {
+        "value": "HSC",
+        "label": "& university admission"
+      }
+    ],
+    "app_link": "",
+    "app_label": "Open the Kumar Math app",
+    "logo": "assets/kumar-math-logo.png"
   }
 }

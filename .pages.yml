@@ -61,6 +61,27 @@ content:
           - { name: photo_chips, label: Labels around photo (max 6), type: string, list: true }
           - { name: signature, label: Signature, type: string }
 
+      - name: founder
+        label: Kumar Math (founder section)
+        type: object
+        fields:
+          - { name: enabled, label: Show this section, type: boolean }
+          - { name: app_link, label: "Kumar Math app link (Play Store / website)", type: string }
+          - { name: app_label, label: App button text, type: string }
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: tagline, label: Motto, type: string }
+          - { name: paragraphs, label: Paragraphs, type: text, list: true }
+          - { name: subjects, label: Subjects / tags, type: string, list: true }
+          - name: stats
+            label: Numbers
+            type: object
+            list: true
+            fields:
+              - { name: value, label: Number, type: string }
+              - { name: label, label: Label, type: string }
+          - { name: logo, label: Logo image (used for sharing), type: image }
+
       - name: skills
         label: Skills
         type: object
@@ -101,7 +122,7 @@ content:
               - name: icon
                 label: Icon
                 type: select
-                options: { values: [work, education] }
+                options: { values: [work, education, teach] }
               - { name: when, label: Dates & place, type: string }
               - { name: title, label: Title, type: string }
               - { name: org, label: Organisation, type: string }

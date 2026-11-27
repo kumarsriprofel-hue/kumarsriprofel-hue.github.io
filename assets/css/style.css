@@ -350,3 +350,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
 .views-foot{display:inline-flex;align-items:center;gap:6px;font-weight:600;padding:5px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
 .views-foot b{color:var(--amber);font-weight:800}
 [data-views][hidden]{display:none}
+/* ---------- contact form status ---------- */
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.form-msg{font-size:.88rem;font-weight:600;padding:10px 14px;border-radius:12px}
+.form-msg.ok{background:rgba(47,179,109,.12);color:#1f7a4a}
+.form-msg.err{background:rgba(214,69,65,.12);color:#b3332f}
+:root[data-theme="dark"] .form-msg.ok{color:#7fd8a6}:root[data-theme="dark"] .form-msg.err{color:#ff9a96}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .form-msg.ok{color:#7fd8a6}:root:not([data-theme="light"]) .form-msg.err{color:#ff9a96}}
+.btn.sending{opacity:.7;cursor:wait}
+form{position:relative}

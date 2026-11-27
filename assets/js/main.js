@@ -32,6 +32,8 @@
     return u.replace(/^\/+/, '');                              // site-relative
   }
   function list(a) { return Array.isArray(a) ? a : []; }
+  // Web3Forms access keys are UUIDs
+  function validKey(k) { return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(k || '').trim()); }
   function chips(tags, cls) {
     tags = list(tags).filter(Boolean);
     if (!tags.length) return '';
@@ -315,9 +317,12 @@
       '<form id="form" novalidate>' +
         '<label>Your name<input name="name" required maxlength="80" autocomplete="name" placeholder="Jane Doe"></label>' +
         '<label>Your email<input name="email" type="email" required maxlength="120" autocomplete="email" placeholder="jane@company.com"></label>' +
-        '<label>Message<textarea name="message" required maxlength="2000" placeholder="Hi, I\'d like to talk about…"></textarea></label>' +
+        '<label>Message<textarea name="message" required minlength="10" maxlength="2000" placeholder="Hi, I\'d like to talk about…"></textarea></label>' +
+        // honeypot: invisible to people, bots fill it in and get ignored
+        '<input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">' +
         '<button class="btn dark" type="submit">Send message <span class="arr"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></button>' +
-        '<small class="note">Opens your email app with the message filled in.</small>' +
+        '<div class="form-msg" role="status" aria-live="polite" hidden></div>' +
+        '<small class="note">' + (validKey(c.form_key) ? 'Your message goes straight to my inbox. I usually reply within 1–2 days.' : 'Opens your email app with the message filled in.') + '</small>' +
       '</form></div></div></section>';
   }
 
@@ -365,12 +370,39 @@
     }, { passive: true });
 
     var form = document.getElementById('form');
-    if (form && p.email) form.addEventListener('submit', function (ev) {
+    var key = String((data.contact || {}).form_key || '').trim();
+    if (form) form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       if (!form.reportValidity()) return;
       var name = form.name.value.trim().slice(0, 80), email = form.email.value.trim().slice(0, 120), msg = form.message.value.trim().slice(0, 2000);
-      var body = msg + '\n\n— ' + name + ' (' + email + ')';
-      location.href = 'mailto:' + encodeURIComponent(p.email).replace('%40', '@') + '?subject=' + encodeURIComponent('Website message from ' + name) + '&body=' + encodeURIComponent(body);
+      var out = form.querySelector('.form-msg'), btn = form.querySelector('button[type=submit]');
+      function say(text, ok) { out.textContent = text; out.className = 'form-msg ' + (ok ? 'ok' : 'err'); out.hidden = false; }
+      if (form.botcheck.checked) { say('✅ Message sent! Thank you.', true); form.reset(); return; }   // bot: pretend success, send nothing
+      if (!validKey(key)) {
+        if (!p.email) return;
+        var body = msg + '\n\n— ' + name + ' (' + email + ')';
+        location.href = 'mailto:' + encodeURIComponent(p.email).replace('%40', '@') + '?subject=' + encodeURIComponent('Website message from ' + name) + '&body=' + encodeURIComponent(body);
+        return;
+      }
+      // send straight to the inbox through Web3Forms (the access key is public by design; it only allows sending to your own email)
+      var last = 0; try { last = Number(sessionStorage.getItem('pk-sent') || 0); } catch (e) {}
+      if (Date.now() - last < 30000) { say('Please wait a few seconds before sending another message.', false); return; }
+      btn.disabled = true; btn.classList.add('sending'); say('Sending…', true);
+      var ctrl = 'AbortController' in window ? new AbortController() : null, timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ access_key: key, subject: 'Website message from ' + name, from_name: 'Portfolio website', name: name, email: email, replyto: email, message: msg }),
+        signal: ctrl ? ctrl.signal : undefined, credentials: 'omit', referrerPolicy: 'strict-origin-when-cross-origin'
+      })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || j.success === false) throw new Error(j.message || r.status); }); })
+        .then(function () {
+          try { sessionStorage.setItem('pk-sent', String(Date.now())); } catch (e) {}
+          form.reset(); say('✅ Message sent! Thank you, ' + name.split(' ')[0] + '. I\'ll reply to ' + email + ' soon.', true);
+        })
+        .catch(function () {
+          say('⚠️ Sorry, the message could not be sent. Please email me directly' + (p.email ? ' at ' + p.email : '') + '.', false);
+        })
+        .then(function () { clearTimeout(timer); btn.disabled = false; btn.classList.remove('sending'); });
     });
     document.getElementById('yr').textContent = new Date().getFullYear();
   }

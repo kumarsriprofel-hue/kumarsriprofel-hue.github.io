@@ -544,7 +544,8 @@
   "contact": {
     "eyebrow": "Contact",
     "heading": "Let's work *together.*",
-    "text": "I'm open to internships, research collaboration and entry-level civil engineering roles. Send me a message and I'll get back to you soon."
+    "text": "I'm open to internships, research collaboration and entry-level civil engineering roles. Send me a message and I'll get back to you soon.",
+    "form_key": ""
   },
   "analytics": {
     "goatcounter_code": "",

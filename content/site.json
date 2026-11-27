@@ -611,5 +611,11 @@
     "app_link": "https://claude.ai/artifact/3UstQbLy522hDhVfoW37je",
     "app_label": "Open the Kumar Math HSC app",
     "logo": "assets/kumar-math-logo.png"
+  },
+  "lab": {
+    "enabled": true,
+    "eyebrow": "Interactive 3D lab",
+    "heading": "Push a *structure*. Watch it respond.",
+    "text": "Drag the 6-storey frame sideways or press down on the truss bridge. Members change colour with drift and force, and when you let go the structure vibrates and settles back to its **original shape**, just like real elastic behaviour. Try the earthquake too."
   }
 }

@@ -346,6 +346,8 @@
     initDecks();
     initVideos();
     initFounder();
+    var labEl = document.querySelector('#lab .lab');
+    if (labEl && window.PKLab) window.PKLab.init(labEl);
 
     function fillRings(scope) { scope.querySelectorAll('.ring-ico').forEach(function (r) { r.querySelector('.val').style.strokeDashoffset = 264 * (1 - r.dataset.w / 100); }); }
     document.querySelectorAll('.tab').forEach(function (t) {
@@ -408,6 +410,36 @@
         .then(function () { clearTimeout(timer); btn.disabled = false; btn.classList.remove('sending'); });
     });
     document.getElementById('yr').textContent = new Date().getFullYear();
+  }
+
+  // ---------- interactive 3D structure lab ----------
+  function renderLab(l) {
+    if (!l || l.enabled === false) return '';
+    return '<section id="lab" class="lab-sec"><div class="wrap">' +
+      '<div class="sec-head reveal"><div><span class="eyebrow">' + esc(l.eyebrow || 'Interactive 3D') + '</span><h2 class="sec-title">' + fmt(l.heading) + '</h2>' +
+        (l.text ? '<p class="lab-intro">' + fmt(l.text) + '</p>' : '') + '</div></div>' +
+      '<div class="lab reveal">' +
+        '<div class="lab-top">' +
+          '<div class="tabs" role="group" aria-label="Choose a structure">' +
+            '<button class="tab" type="button" data-mode="building" aria-pressed="true">🏢 6-storey frame</button>' +
+            '<button class="tab" type="button" data-mode="bridge" aria-pressed="false">🌉 Truss bridge</button>' +
+          '</div>' +
+          '<div class="lab-acts"><button class="lab-btn quake" type="button" data-act="quake">🌍 Earthquake</button><button class="lab-btn" type="button" data-act="reset">↺ Reset</button></div>' +
+        '</div>' +
+        '<div class="lab-stage">' +
+          '<canvas tabindex="0" role="img" aria-label="Interactive 3D six-storey frame building. Drag left or right to push it; release to watch it vibrate back to its original shape. Arrow keys also work."></canvas>' +
+          '<div class="lab-hint" aria-hidden="true"><span class="hand">👆</span><span class="lab-hint-b">Drag the building sideways, then let go</span><span class="lab-hint-r">Press &amp; drag down on the deck, then let go</span></div>' +
+          '<span class="lab-phase" data-r="phase" aria-live="polite">At rest · original shape</span>' +
+        '</div>' +
+        '<div class="lab-read">' +
+          '<div><span data-r="l1">Roof drift</span><strong data-r="v1">0 mm</strong></div>' +
+          '<div><span data-r="l2">Max storey drift ratio</span><strong data-r="v2">0.0000</strong></div>' +
+          '<div><span data-r="l3">Limit (BNBC 2020)</span><strong data-r="v3">0.020</strong></div>' +
+          '<div><span>Check</span><strong class="lab-status">✓ Within limit</strong></div>' +
+        '</div>' +
+        '<div class="lab-legend"><span><i class="lg-g"></i>Low</span><span><i class="lg-a"></i>Medium</span><span><i class="lg-r"></i>High / over limit</span><span class="lg-bridge"><i class="lg-b"></i>Compression</span><span class="lg-bridge"><i class="lg-t"></i>Tension</span></div>' +
+      '</div>' +
+    '</div></section>';
   }
 
   // ---------- Kumar Math founder section ----------
@@ -569,7 +601,7 @@
     document.getElementById('app').innerHTML =
       renderHero(p, data.founder) + renderMarquee(data.marquee || {}) + renderAbout(data.about || {}, p) + renderFounder(data.founder) +
       renderSkills(data.skills || {}) + renderExperience(data.experience || {}) +
-      renderProjects(data.projects || {}) + renderPublications(data.publications || {}) + renderContact(data.contact || {}, p);
+      renderProjects(data.projects || {}) + renderLab(data.lab) + renderPublications(data.publications || {}) + renderContact(data.contact || {}, p);
     // hide nav links for empty sections
     document.querySelectorAll('#links a[href^="#"]').forEach(function (a) {
       if (!document.querySelector(a.getAttribute('href'))) a.parentNode.hidden = true;

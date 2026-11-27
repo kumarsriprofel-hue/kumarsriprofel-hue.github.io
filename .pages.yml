@@ -165,6 +165,15 @@ content:
               - { name: link, label: Link (Google Drive etc.), type: string }
               - { name: link_label, label: Link text, type: string }
 
+      - name: lab
+        label: 3D structure lab
+        type: object
+        fields:
+          - { name: enabled, label: Show the 3D lab, type: boolean }
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: Intro text, type: text }
+
       - name: publications
         label: Publications
         type: object

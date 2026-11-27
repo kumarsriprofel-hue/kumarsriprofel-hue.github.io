@@ -27,6 +27,7 @@ content:
           - { name: phone, label: Phone (leave empty to hide), type: string }
           - { name: linkedin, label: LinkedIn URL, type: string }
           - { name: github, label: GitHub URL, type: string }
+          - { name: facebook, label: Facebook URL, type: string }
           - { name: cv, label: CV file (PDF or Word), type: file }
           - { name: photo, label: Main photo (transparent PNG works best), type: image }
           - { name: about_photo, label: About section photo, type: image }

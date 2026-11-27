@@ -55,6 +55,7 @@
     github: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>',
     work: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>',
     education: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>',
+    facebook: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"/></svg>',
     teach: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M7 9h5M7 12h3M8 20l4-4 4 4M15 8l2 2"/></svg>',
     doc: '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></svg>'
   };
@@ -66,6 +67,7 @@
     var socials = '';
     if (safeUrl(p.linkedin)) socials += '<a class="soc" href="' + esc(safeUrl(p.linkedin)) + '" target="_blank" rel="noopener noreferrer">' + ICONS.linkedin + 'LinkedIn</a>';
     if (safeUrl(p.github)) socials += '<a class="soc" href="' + esc(safeUrl(p.github)) + '" target="_blank" rel="noopener noreferrer">' + ICONS.github + 'GitHub</a>';
+    if (safeUrl(p.facebook)) socials += '<a class="soc" href="' + esc(safeUrl(p.facebook)) + '" target="_blank" rel="noopener noreferrer">' + ICONS.facebook + 'Facebook</a>';
     if (mail) socials += '<a class="soc" href="' + esc(mail) + '">' + ICONS.mail + 'Email</a>';
     if (p.location) socials += '<span class="soc">📍 ' + esc(p.location) + '</span>';
     socials += '<span class="soc views-pill" data-views hidden title="Total page views (updates live)"><i class="live-dot"></i>👁 <b>0</b><em></em></span>';
@@ -312,6 +314,7 @@
     if (p.email) rows += '<a class="c-item" href="mailto:' + esc(p.email) + '"><span class="c-ico">' + ICONS.mail + '</span><div><small>Email</small><span>' + esc(p.email) + '</span></div></a>';
     if (p.phone) rows += '<a class="c-item" href="tel:' + esc(String(p.phone).replace(/[^\d+]/g, '')) + '"><span class="c-ico">' + ICONS.phone + '</span><div><small>Phone</small><span>' + esc(p.phone) + '</span></div></a>';
     if (safeUrl(p.linkedin)) rows += '<a class="c-item" href="' + esc(safeUrl(p.linkedin)) + '" target="_blank" rel="noopener noreferrer"><span class="c-ico">' + ICONS.linkedin + '</span><div><small>LinkedIn</small><span>' + esc(String(p.linkedin).replace(/^https?:\/\/(www\.)?/, '')) + '</span></div></a>';
+    if (safeUrl(p.facebook)) rows += '<a class="c-item" href="' + esc(safeUrl(p.facebook)) + '" target="_blank" rel="noopener noreferrer"><span class="c-ico">' + ICONS.facebook.replace(/16/g, '18') + '</span><div><small>Facebook</small><span>' + esc(String(p.facebook).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')) + '</span></div></a>';
     if (safeUrl(p.github)) rows += '<a class="c-item" href="' + esc(safeUrl(p.github)) + '" target="_blank" rel="noopener noreferrer"><span class="c-ico">' + ICONS.github + '</span><div><small>GitHub</small><span>' + esc(String(p.github).replace(/^https?:\/\//, '')) + '</span></div></a>';
     return '<section id="contact" class="pt0"><div class="wrap"><div class="contact-box reveal"><div>' +
       '<span class="eyebrow">' + esc(c.eyebrow) + '</span><h2>' + fmt(c.heading) + '</h2><p>' + fmt(c.text) + '</p>' +

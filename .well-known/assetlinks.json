@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.kumarmath.hsc",
+        "sha256_cert_fingerprints": ["B0:8F:E8:08:DE:35:9E:50:07:F0:8B:61:46:AB:EE:AF:77:DB:B4:F7:D5:32:2C:EA:33:3B:E8:59:B6:79:AA:59"]
+      }
+    }]

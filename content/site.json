@@ -579,7 +579,7 @@
     "tagline": "Be rational! • Get real!",
     "paragraphs": [
       "I started **Kumar Math** in 2023 to help HSC and university admission students in Bangladesh learn Higher Math, Physics and Chemistry the clear way: step by step, formula by formula.",
-      "I write chapter-wise notes, formula sheets and full admission model tests with answer keys, and share them through the Kumar Math app."
+      "The **Kumar Math HSC app** brings it together in Bangla: chapter-wise lectures and formula lists for every Physics and Chemistry chapter, MCQ practice with explanations, and a study routine. I also write admission model tests with answer keys."
     ],
     "subjects": [
       "Higher Math",
@@ -607,8 +607,8 @@
         "label": "& university admission"
       }
     ],
-    "app_link": "",
-    "app_label": "Open the Kumar Math app",
+    "app_link": "https://claude.ai/artifact/3UstQbLy522hDhVfoW37je",
+    "app_label": "Open the Kumar Math HSC app",
     "logo": "assets/kumar-math-logo.png"
   }
 }

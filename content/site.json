@@ -56,7 +56,7 @@
         "label": "CGPA out of 4.00"
       },
       {
-        "value": "6",
+        "value": "7",
         "label": "Major projects"
       },
       {
@@ -373,6 +373,52 @@
         "slides_pdf": "",
         "video": "assets/video/sathmatha-v2.mp4",
         "video_poster": "assets/video/sathmatha-v2-poster.jpg"
+      },
+      {
+        "featured": false,
+        "kind": "Structural assessment · ETABS 22.5",
+        "title": "FPTP Building, UTHM Malaysia: Design vs As-Built ETABS Study",
+        "summary": "How much structural integrity does a real building lose when its concrete and slabs fall short of the design? I studied the 9-storey RC Faculty of Technology Management and Business (FPTP) at Universiti Tun Hussein Onn Malaysia, Parit Raja, Johor.",
+        "bullets": [
+          "Modelled the superstructure in ETABS 22.5 from the as-built structural layout: columns, beams, slabs, stairs and lift cores, with pin supports and gravity loads (BS 8110). Curved slabs and beams were converted to rectangular ones with the same area.",
+          "Model 1 uses the design data: fcu = 30 N/mm² and fy = 460 N/mm².",
+          "Model 2 uses core-test results: mean strength of 15.19 N/mm² in beams, 16.74 in slabs and 17.50 in columns, plus measured slab thicknesses of 145–235 mm.",
+          "Compared both models to find the difference in structural integrity, and presented the work in a 3D proof reel."
+        ],
+        "stats": [
+          {
+            "value": "9",
+            "label": "Storeys"
+          },
+          {
+            "value": "30 → 15.2",
+            "label": "Beam concrete, N/mm²"
+          },
+          {
+            "value": "7 of 10",
+            "label": "Slabs under 200 mm"
+          },
+          {
+            "value": "2",
+            "label": "ETABS models compared"
+          }
+        ],
+        "tags": [
+          "ETABS 22.5",
+          "BS 8110",
+          "Core test",
+          "As-built assessment",
+          "Blender"
+        ],
+        "image": "assets/video/fptp-etabs-poster.jpg",
+        "image_alt": "Night render of the FPTP building at Universiti Tun Hussein Onn Malaysia",
+        "image_focus": "50% 50%",
+        "video": "assets/video/fptp-etabs.mp4",
+        "video_poster": "assets/video/fptp-etabs-poster.jpg",
+        "slides": [],
+        "slides_pdf": "",
+        "link": "https://drive.google.com/drive/folders/1QCNl10Pt0njUVrlzINOHQn-PczUvVBwh?usp=sharing",
+        "link_label": "View models, drawings & brief"
       },
       {
         "featured": false,
